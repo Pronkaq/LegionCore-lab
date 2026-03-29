@@ -1,4 +1,25 @@
-worldserver:
+services:
+  db:
+    image: mysql:5.7
+    container_name: legioncore-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  worldserver:
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,7 +31,7 @@ worldserver:
     command: ["/opt/legioncore/bin/worldserver"]
     volumes:
       - legion_logs:/opt/legioncore/logs
-      - legion_etc:/opt/legioncore/etc
+      - ./docker/runtime/config/worldserver.conf:/opt/legioncore/etc/worldserver.conf
 
   bnetserver:
     build:
@@ -24,9 +45,8 @@ worldserver:
     command: ["/opt/legioncore/bin/bnetserver"]
     volumes:
       - legion_logs:/opt/legioncore/logs
-      - legion_etc:/opt/legioncore/etc
+      - ./docker/runtime/config/bnetserver.conf:/opt/legioncore/etc/bnetserver.conf 
 
 volumes:
   mysql_data:
   legion_logs:
-  legion_etc:

@@ -1,7 +1,7 @@
 # Артефакты от блида
 build/
 bin/
-
+build-docker/
 # env файлы 
 .env
 

@@ -38,7 +38,13 @@ RUN apt update && apt install -y \
     libbz2-1.0 \
     libreadline8 \
     libncurses6 \
-    default-mysql-client \
+    libmysqlclient21 \
+    libboost-filesystem1.71.0 \
+    libboost-program-options1.71.0 \
+    libboost-system1.71.0 \
+    libboost-thread1.71.0 \
+    libboost-iostreams1.71.0 \
+    libboost-regex1.71.0 \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
