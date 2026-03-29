@@ -39,19 +39,6 @@ struct RealmBuildInfo
     std::array<uint8, 16> Mac64AuthSeed;
 };
 
-namespace boost
-{
-    namespace asio
-    {
-        class io_service;
-    }
-
-    namespace system
-    {
-        class error_code;
-    }
-}
-
 namespace bgs
 {
     namespace protocol
@@ -114,7 +101,7 @@ private:
     std::unordered_set<std::string> _subRegions;
     uint32 _updateInterval;
     std::unique_ptr<boost::asio::deadline_timer> _updateTimer;
-    std::unique_ptr<boost::asio::ip::tcp_resolver> _resolver;
+    std::unique_ptr<boost::asio::ip::tcp::resolver> _resolver;
     mutable std::recursive_mutex i_RealmList_lock;
 };
 
