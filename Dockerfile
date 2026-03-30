@@ -50,16 +50,16 @@ RUN apt update && apt install -y \
 
 WORKDIR /opt/legioncore
 
-COPY --from=builder /usr/local/bin/worldserver /opt/legioncore/bin/worldserver
-COPY --from=builder /usr/local/bin/bnetserver /opt/legioncore/bin/bnetserver
-COPY --from=builder /usr/local/bin/bnetserver.cert.pem /opt/legioncore/bin/bnetserver.cert.pem
-COPY --from=builder /usr/local/bin/bnetserver.key.pem /opt/legioncore/bin/bnetserver.key.pem
-COPY --from=builder /usr/local/etc/worldserver.conf.dist /opt/legioncore/etc/worldserver.conf.dist
-COPY --from=builder /usr/local/etc/bnetserver.conf.dist /opt/legioncore/etc/bnetserver.conf.dist
+COPY --from=builder /usr/local/bin/worldserver /usr/local/bin/worldserver
+COPY --from=builder /usr/local/bin/bnetserver /usr/local/bin/bnetserver
+COPY --from=builder /usr/local/bin/bnetserver.cert.pem /usr/local/bin/bnetserver.cert.pem
+COPY --from=builder /usr/local/bin/bnetserver.key.pem /usr/local/bin/bnetserver.key.pem
+COPY --from=builder /usr/local/etc/worldserver.conf.dist /usr/local/etc/worldserver.conf.dist
+COPY --from=builder /usr/local/etc/bnetserver.conf.dist /usr/local/etc/bnetserver.conf.dist
 COPY docker/runtime/entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh && \
-    mkdir -p /opt/legioncore/bin /opt/legioncore/etc /opt/legioncore/logs
+    mkdir -p /usr/local/bin /usr/local/etc /opt/legioncore/logs
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/opt/legioncore/bin/worldserver"]
+CMD ["/usr/local/bin/worldserver"]
