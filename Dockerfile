@@ -46,6 +46,9 @@ RUN apt update && apt install -y \
     libboost-iostreams1.71.0 \
     libboost-regex1.71.0 \
     ca-certificates \
+    curl \
+    unzip \
+    p7zip-full \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/legioncore

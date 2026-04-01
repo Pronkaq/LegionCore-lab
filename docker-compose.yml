@@ -31,6 +31,8 @@ services:
         condition: service_healthy
     working_dir: /usr/local/bin
     command: ["/usr/local/bin/worldserver"]
+    environment:
+      CLIENTDATA_URL: ${CLIENTDATA_URL}
     volumes:
       - legion_logs:/opt/legioncore/logs
       - ./docker/runtime/config/worldserver.conf:/usr/local/etc/worldserver.conf
