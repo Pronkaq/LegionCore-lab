@@ -41,7 +41,7 @@ if [ "${1:-}" = "/usr/local/bin/worldserver" ]; then
       if [ -d /tmp/clientdata_unpack/ClientData ]; then
         mv /tmp/clientdata_unpack/ClientData/* /usr/local/bin/ClientData/
       elif [ -d /tmp/clientdata_unpack/Data ]; then
-        mv /tmp/clientdata_unpack/Data /usr/local/bin/ClientData
+        mv /tmp/clientdata_unpack/Data/* /usr/local/bin/ClientData/
       else
         echo "Archive does not contain ClientData or Data directory"
         echo "Archive contents:"
